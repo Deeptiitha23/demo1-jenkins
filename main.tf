@@ -12,7 +12,7 @@ resource "aws_instance" "example1"{
         provider=aws.insta1
         key_name="test"
         tags={
-        Name="master2"
+        Name="master3"
         }
 }
 resource "aws_instance" "example2"{
@@ -21,7 +21,7 @@ resource "aws_instance" "example2"{
         provider=aws.insta2
         key_name="test"
         tags={
-        Name="worker2"
+        Name="worker3"
         }
 }
 output "private_ips"{
