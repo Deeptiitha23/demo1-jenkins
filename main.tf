@@ -10,7 +10,7 @@ resource "aws_instance" "example1"{
         ami= "ami-04b70fa74e45c3917"
         instance_type="t2.large"
         provider=aws.insta1
-        key_name="demo.pem"
+        key_name="demo"
         tags={
         Name="master2"
         }
@@ -19,7 +19,7 @@ resource "aws_instance" "example2"{
         ami= "ami-04b70fa74e45c3917"
         instance_type="t2.micro"
         provider=aws.insta2
-        key_name="demo.pem"
+        key_name="demo"
         tags={
         Name="worker2"
         }
