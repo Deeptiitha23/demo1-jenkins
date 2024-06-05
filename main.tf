@@ -12,16 +12,16 @@ resource "aws_instance" "example1"{
         provider=aws.insta1
         key_name="test"
         tags={
-        Name="master4"
+        Name="master5"
         }
 }
 resource "aws_instance" "example2"{
         ami= "ami-04b70fa74e45c3917"
-        instance_type="t2.medium"
+        instance_type="t2.micro"
         provider=aws.insta2
         key_name="test"
         tags={
-        Name="worker4"
+        Name="worker5"
         }
 }
 output "private_ips"{
