@@ -101,7 +101,7 @@
 
     - name: Store Kubernetes master IP address
       lineinfile:
-        path: /tmp/ansible/kube_master_ip
+        path: /tmp/kube_master_ip
         line: "{{ hostvars[inventory_hostname].ansible_host }}"
       when: inventory_hostname == 'master'
 
