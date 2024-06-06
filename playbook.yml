@@ -455,20 +455,20 @@
 
     - name: Create directory for storing master IP
       file:
-        path: /tmp
+        path: /tmp/ansible
         state: directory
         mode: '0755'
       when: inventory_hostname == 'master'
 
     - name: Store Kubernetes master IP address
       lineinfile:
-        path: /tmp/kube_master_ip
-        line: "{{ hostvars[inventory_hostname].ansible_host }}"
+        path: /tmp/ansible/kube_master_ip
+        line: "{{ ansible_host }}"
       when: inventory_hostname == 'master'
 
     - name: Verify Kubernetes master IP file
       stat:
-        path: /tmp/kube_master_ip
+        path: /tmp/ansible/kube_master_ip
       register: master_ip_file
 
     - name: Debug master IP file creation
@@ -536,19 +536,19 @@
 
     - name: Create directory for storing master IP
       file:
-        path: /tmp
+        path: /tmp/ansible
         state: directory
         mode: '0755'
 
     - name: Store Kubernetes master IP address
       lineinfile:
-        path: /tmp/kube_master_ip
+        path: /tmp/ansible/kube_master_ip
         line: "{{ ansible_host }}"
       when: inventory_hostname == 'master'
 
     - name: Verify Kubernetes master IP file
       stat:
-        path: /tmp/kube_master_ip
+        path: /tmp/ansible/kube_master_ip
       register: master_ip_file
 
     - name: Debug master IP file creation
