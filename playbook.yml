@@ -104,6 +104,9 @@
       args:
         executable: /bin/bash
 
+    - name: Store Kubernetes master IP address
+      shell: echo "{{ groups['master'] | first }}" > /tmp/kube_master_ip
+      
     - name: Reset previous kubeadm
       command: kubeadm reset -f
 
