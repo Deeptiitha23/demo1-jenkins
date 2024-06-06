@@ -364,19 +364,5 @@
 
     - name: Join the cluster
       command: "{{ hostvars['master'].join_command }}"
-- hosts: all
-  become: yes
-  tasks:
-    - name: Install AMF
-      shell: |
-        docker run -d --name amf -p 8080:8080 my-amf-image
-
-    - name: Install SMF
-      shell: |
-        docker run -d --name smf -p 9090:9090 my-smf-image
-
-    - name: Install UPF
-      shell: |
-        docker run -d --name upf -p 7070:7070 my-upf-image
 
 
