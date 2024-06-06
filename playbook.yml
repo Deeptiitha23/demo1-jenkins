@@ -455,20 +455,20 @@
 
     - name: Create directory for storing master IP
       file:
-        path: /tmp/ansible
+        path: /tmp/
         state: directory
         mode: '0755'
       when: inventory_hostname == 'master'
 
     - name: Store Kubernetes master IP address
       lineinfile:
-        path: /tmp/ansible/kube_master_ip
+        path: /tmp/kube_master_ip
         line: "{{ ansible_host }}"
       when: inventory_hostname == 'master'
 
     - name: Verify Kubernetes master IP file
       stat:
-        path: /tmp/ansible/kube_master_ip
+        path: /tmp/kube_master_ip
       register: master_ip_file
 
     - name: Debug master IP file creation
@@ -533,20 +533,6 @@
         KUBECONFIG: /home/{{ ansible_user }}/.kube/config
       args:
         executable: /bin/bash
-
-    - name: Store Kubernetes master IP address
-      block:
-        - name: Ensure the directory exists
-          file:
-            path: /tmp/ansible
-            state: directory
-            mode: '0755'
-
-        - name: Write Kubernetes master IP address to file
-          copy:
-            content: "{{ hostvars['master'].ansible_host }}"
-            dest: /tmp/ansible/kube_master_ip
-      when: inventory_hostname == 'master'
 
     - name: Install Flannel CNI
       command: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
