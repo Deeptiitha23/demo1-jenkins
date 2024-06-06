@@ -96,7 +96,7 @@
     - name: Store Kubernetes master IP address
       lineinfile:
         path: /tmp/kube_master_ip
-        line: "master ansible_host={{ ansible_host }}"
+        line: "{{ hostvars[inventory_hostname].ansible_host }}"
       when: inventory_hostname == 'master'
 
 - hosts: master
@@ -110,9 +110,9 @@
       args:
         executable: /bin/bash
 
-    - name: Debug groups variable
-      debug:
-        var: groups
+    # - name: Debug groups variable
+    #   debug:
+    #     var: groups
 
     - name: Debug inventory_hostname variable
       debug:
