@@ -104,8 +104,16 @@
       args:
         executable: /bin/bash
 
+    - name: Debug groups variable
+      debug:
+        var: groups
+
+    - name: Debug inventory_hostname variable
+      debug:
+        var: inventory_hostname
+
     - name: Store Kubernetes master IP address
-      shell: echo "{{ groups['master'] | first }}" > /tmp/kube_master_ip
+      shell: echo "{{ inventory_hostname }}" > /tmp/kube_master_ip
       
     - name: Reset previous kubeadm
       command: kubeadm reset -f
