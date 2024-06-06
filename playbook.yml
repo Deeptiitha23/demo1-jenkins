@@ -112,8 +112,10 @@
       debug:
         var: inventory_hostname
 
+    # - name: Store Kubernetes master IP address
+    #   shell: echo "{{ inventory_hostname }}" > /tmp/kube_master_ip
     - name: Store Kubernetes master IP address
-      shell: echo "{{ inventory_hostname }}" > /tmp/kube_master_ip
+      shell: echo "{{ ansible_default_ipv4.address }}" > /tmp/kube_master_ip
       
     - name: Reset previous kubeadm
       command: kubeadm reset -f
