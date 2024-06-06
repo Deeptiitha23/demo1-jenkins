@@ -458,6 +458,7 @@
         path: /tmp/ansible
         state: directory
         mode: '0755'
+      when: inventory_hostname == 'master'
 
     - name: Store Kubernetes master IP address
       lineinfile:
@@ -526,7 +527,7 @@
             break
           else
             sleep 10
-          end
+          fi
         done
       environment:
         KUBECONFIG: /home/{{ ansible_user }}/.kube/config
