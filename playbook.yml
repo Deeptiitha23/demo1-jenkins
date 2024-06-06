@@ -168,6 +168,9 @@
       command: kubeadm token create --print-join-command 
       register: join_command_output
 
+    - name: Install Helm
+      shell: curl https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3 | bash
+
 - hosts: worker
   become: yes
   tasks:
