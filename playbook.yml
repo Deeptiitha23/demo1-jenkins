@@ -204,6 +204,17 @@
         state: started
         enabled: yes
 
+    - name: Add user to Docker group
+      user:
+        name: "{{ ansible_user }}"
+        groups: docker
+        append: yes
+
+    - name: Restart Docker to apply group changes
+      systemd:
+        name: docker
+        state: restarted
+
     - name: Add Kubernetes GPG key
       apt_key:
         url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
