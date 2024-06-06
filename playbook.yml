@@ -92,6 +92,12 @@
         name: containerd
         state: restarted
         enabled: yes
+        
+    - name: Store Kubernetes master IP address
+      lineinfile:
+        path: /tmp/kube_master_ip
+        line: "master ansible_host={{ ansible_host }}"
+      when: inventory_hostname == 'master'
 
 - hosts: master
   become: yes
