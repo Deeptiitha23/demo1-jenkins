@@ -141,7 +141,7 @@
             break
           else
             sleep 10
-          end
+          fi
         done
       environment:
         KUBECONFIG: /home/{{ ansible_user }}/.kube/config
@@ -152,13 +152,6 @@
       command: kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
       environment:
         KUBECONFIG: /etc/kubernetes/admin.conf
-
-    - name: Copy kubeconfig to Jenkins agent
-      fetch:
-        src: /home/{{ ansible_user }}/.kube/config
-        dest: /tmp/kubeconfig
-        flat: yes
-        validate_checksum: no
 
     - name: command
       command: kubeadm token create --print-join-command 
