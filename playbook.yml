@@ -198,6 +198,12 @@
         name: docker-ce
         state: present
 
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
     - name: Add Kubernetes GPG key
       apt_key:
         url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
