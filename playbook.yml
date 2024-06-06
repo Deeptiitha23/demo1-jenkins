@@ -93,9 +93,15 @@
         state: restarted
         enabled: yes
         
+    - name: Create directory for storing master IP
+      file:
+        path: /tmp/ansible
+        state: directory
+        mode: '0755'
+
     - name: Store Kubernetes master IP address
       lineinfile:
-        path: /tmp/kube_master_ip
+        path: /tmp/ansible/kube_master_ip
         line: "{{ hostvars[inventory_hostname].ansible_host }}"
       when: inventory_hostname == 'master'
 
@@ -110,17 +116,12 @@
       args:
         executable: /bin/bash
 
-    # - name: Debug groups variable
-    #   debug:
-    #     var: groups
-
     - name: Debug inventory_hostname variable
       debug:
         var: inventory_hostname
+    
     # - name: Store Kubernetes master IP address
-    #   shell: echo "{{ ansible_host }}" > /tmp/kube_master_ip
-    - name: Store Kubernetes master IP address
-      shell: echo "{{ inventory_hostname }}" > /tmp/kube_master_ip
+    #   shell: echo "{{ inventory_hostname }}" > /tmp/kube_master_ip
       
     - name: Reset previous kubeadm
       command: kubeadm reset -f
